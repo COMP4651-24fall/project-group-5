@@ -1,0 +1,10 @@
+argparse
+collections
+json
+numpy<2.0
+pandas
+sklearn
+torch
+torch.nn
+torch.optim
+tqdm
