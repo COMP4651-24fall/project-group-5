@@ -18,7 +18,7 @@ if not args.cloud:
 def predict(model_path, data):
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     model = Net()
-    model.load_state_dict(torch.load(model_path))
+    model.load_state_dict(torch.load(model_path, map_location=device))
     if torch.cuda.device_count() > 1:
         model = torch.nn.DataParallel(model)
     model.to(device)
