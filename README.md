@@ -1,3 +1,4 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/jzfQvm5J)
-# Project
-Starter code of COMP4651 group project
+# COMP4651-24Fall-Project
+
+To make sure the repo can be updated properly,
+[Download full data here](https://hkustconnect-my.sharepoint.com/:f:/g/personal/hwkwong_connect_ust_hk/Ek4N3hjOj6NOsohqaiFcoZsBZGOpwTmS3ny58cs43l6O9Q?e=KfsLvN)
