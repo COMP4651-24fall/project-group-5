@@ -3,9 +3,10 @@ argparser = argparse.ArgumentParser()
 argparser.add_argument("-c", "--cloud", type=str, default="False", nargs="?", help="Whether to run the script on cloud or not")
 args = argparser.parse_args()
 if args.cloud:
-    args.cloud = False
     if args.cloud == 'True':
         args.cloud = True
+    else:
+        args.cloud = False
 
 import pandas as pd
 import requests
