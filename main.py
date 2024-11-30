@@ -92,7 +92,7 @@ def train_model(training_data, training_labels, validation_data, validation_labe
                 'optimizer_state_dict': optimizer.state_dict(),
                 'loss': training_loss
             }
-            torch.save(checkpoint, f'model/training/lr_1e-1/checkpoint_{epoch+1}.pth')
+            torch.save(checkpoint, f'model/training/checkpoint_{epoch+1}.pth')
 
         if validation_loss < best_loss - early_stopping_threshold:
             best_loss = validation_loss
@@ -100,7 +100,7 @@ def train_model(training_data, training_labels, validation_data, validation_labe
         else:
             epochs_no_improve += 1
             if epochs_no_improve == early_stopping_rounds:
-                torch.save(model.state_dict(), 'model/training/lr_1e-1/early_stopping.pth')
+                torch.save(model.state_dict(), 'model/training/early_stopping.pth')
                 print(f'Early stopping at epoch {epoch+1}/{epochs} with validation loss: {validation_loss} and validation accuracy: {validation_accuracy}')
                 break
 
@@ -124,56 +124,13 @@ def predict(x):
 
 
 def main():
-    # start_time = time()
-    # train, test = consolidate_data()
-    # print(f"Data consolidation took {time() - start_time} seconds")
-    # start_time = time()
-    # transform_data(train)
-    # print(f"Data transformation took {time() - start_time} seconds")
-    # train.to_csv('data/train_transformed.csv', index=False)
-    # start_time = time()
-    # transform_data(test)
-    # test.to_csv('data/test_transformed.csv', index=False)
-    # print(f"Data transformation took {time() - start_time} seconds")
-
-    # evaluate the number of unique values (to be used for the embedding layer)
-    # total = 0
-    # for col in tqdm(train.columns):
-    #     count = train[col].nunique()
-    #     print(f"{col}: {count}")
-    #     total += count
-    # print(f"Total: {total}")
-
-    # total = 0
-    # for col in tqdm(test.columns):
-    #     count = test[col].nunique()
-    #     print(f"{col}: {count}")
-    #     total += count
-    # print(f"Total: {total}")
-
-    # total = 0
-    # for col in tqdm(pd.concat([train, test]).columns):
-    #     count = pd.concat([train, test])[col].nunique()
-    #     print(f"{col}: {count}")
-    #     total += count
-    # print(f"Total: {total}")
-
     train = pd.read_csv('data/train_transformed.csv')
     training, validation = train_test_split(train, test_size=0.2)
     training_labels, validation_labels = training["target"], validation["target"]
     training.drop("target", axis=1, inplace=True)
     validation.drop("target", axis=1, inplace=True)
-    lr, epochs = 1e-1, 100
+    lr, epochs = 1e-2, 100
     train_model(training, training_labels, validation, validation_labels, lr, epochs, batch_size=800000)
-    # test = pd.read_csv('data/test_transformed.csv')
-    # test.drop("id", axis=1, inplace=False)
-    # # test_transformed = transform_data(test)
-    # test_pred_y = predict(test)
-    # # save the predicted output that matches with their id in test
-    # test_pred_y = pd.DataFrame(test_pred_y)
-    # test_pred_y.to_csv('data/test_pred_y.csv', index=True)
     
-
-
 if __name__ == '__main__':
     main()
