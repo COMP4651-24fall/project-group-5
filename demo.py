@@ -37,7 +37,7 @@ def predict(model_path, data):
     return predictions
 
 def send_to_aws(data):
-    url = 'http://<your-ec2-instance-public-ip>:5000/predict'
+    url = 'http://54.205.189.253:5000/predict'
     response = requests.post(url, json=data)
     return response.json()
 
